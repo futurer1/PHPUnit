@@ -8,7 +8,11 @@ class UserStore
 
     public function addUser($name, $mail, $pass)
     {
-        
+        if(isset($this->users[$mail])){
+            throw new Exception("Пользователь {$mail} уже зарегистрирован");
+        }
+        $this->users[$mail] = array('name' => $name, 'mail' => $mail, 'pass' => $pass);
+        return true;
     }
 
     public function notifyPasswordFailure()
