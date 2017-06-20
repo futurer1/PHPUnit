@@ -6,7 +6,7 @@ class UserStore
 {
     private $users = array();    //массив для хранения пользователей
 
-    public function addUser($name, $mail, $pass)
+    public function addUser($name, $mail, $pass)    //добавляет нового пользователя
     {
         if(isset($this->users[$mail])){
             throw new Exception("Пользователь {$mail} уже зарегистрирован");
@@ -15,12 +15,16 @@ class UserStore
         return true;
     }
 
-    public function notifyPasswordFailure()
+    public function notifyPasswordFailure($mail)    //добавляет к пользователю сообщение об ошибке
     {
+        if(isset($this->users[$mail])){
+            $this->users[$mail]['failed'] = time();
+        }
     }
 
-    function getUser($mail)
+    function getUser($mail)    //возвращает массив с данными о пользователе
     {
+        return ($this->users[$mail]);
     }
 }
 
