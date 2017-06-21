@@ -52,3 +52,12 @@ class UserStore
         return ($this->users[$mail]);
     }
 }
+
+//Используем инструментарий:
+$store = new UserStore();
+$store->addUser("Ivan Ivanov", "ivan@mail.ru", "12345");
+
+$validator = new Validator($store);
+if($validator->validateUser("ivan@mail.ru", "12345")) {
+    echo "Пользователь найден.";
+}
