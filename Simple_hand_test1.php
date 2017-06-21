@@ -17,5 +17,8 @@ class Validator
                                                                  //вернуть массив с данными о пользователе
             return false;
         }
+        if($user['pass'] == $pass) {    //если проверяемый парольсовпал с возвращенным из объекта store
+            return true;
+        }
     }
 }
