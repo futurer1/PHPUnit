@@ -6,6 +6,11 @@
 */
 class Validator
 {
+/**
+* Используется для хранения экземпляра объекта класса UserStore
+*
+* @var object
+*/
     private $store;
     
     public function __construct(UserStore $store)
@@ -15,11 +20,11 @@ class Validator
   
     public function validateUser($mail, $pass)
     {
-        if(!is_array($user = $this->store->getUser($mail))) {    //если метод объекта store не может 
+        if(!is_array($user = $this->store->getUser($mail))) {    //если метод объекта $store не может 
                                                                  //вернуть массив с данными о пользователе
             return false;
         }
-        if($user['pass'] == $pass) {    //если проверяемый парольсовпал с возвращенным из объекта store
+        if($user['pass'] == $pass) {    //если проверяемый пароль совпал с возвращенным из объекта $store
             return true;
         }
         $this->store->notifyPasswordFailure($mail);
@@ -32,7 +37,13 @@ class Validator
 */
 class UserStore
 {
-    private $users = array();    //массив для хранения пользователей
+/**
+* Массив для хранения пользователей
+*
+* @var array
+*/
+    private $users = array();
+    
     public function addUser($name, $mail, $pass)    //добавляет нового пользователя
     {
         if(isset($this->users[$mail])){
