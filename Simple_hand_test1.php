@@ -13,5 +13,9 @@ class Validator
   
     public function validateUser($mail, $pass)
     {
+        if(!is_array($user = $this->store->getUser($mail))) {    //если метод объекта store не может 
+                                                                 //вернуть массив с данными о пользователе
+            return false;
+        }
     }
 }
